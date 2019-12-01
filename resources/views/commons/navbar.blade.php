@@ -8,9 +8,13 @@
         
         <div class="collapse navbar-collapse" id="nav-bar">
             <ul class="navbar-nav mr-auto"></ul>
-            <ul class="navbar-nav">
-                {!! link_to_route('tasks.create', '新規タスクの追加', [], ['class' => 'btn btn-info btn-block']) !!}
+            <ul class="nav navbar-nav navbar-right">
+                <li>{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>
+                <li><a href="#">Login</a></li>
             </ul>
+            <!--<ul class="navbar-nav">-->
+            <!--    {!! link_to_route('tasks.create', '新規タスクの追加', [], ['class' => 'btn btn-info btn-block']) !!}-->
+            <!--</ul>-->
         </div>
     </nav>
 </header>
