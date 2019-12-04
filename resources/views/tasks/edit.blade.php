@@ -5,7 +5,7 @@
     <h1>タスクID : {{ $task->id }}の編集ページ</h1>
     
     <div class="row">
-        <div class="col-6">
+        <div class="col">
             
             {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put']) !!}
             
@@ -19,9 +19,13 @@
                     {!! Form::text('status', null, ['class' => 'form-control']) !!}
                 </div>
                 
-                {!! Form::submit('更新', ['class' => 'btn btn-info btn-block']) !!}
+                {!! Form::submit('更新', ['class' => 'btn btn-info btn-block mb-3']) !!}
             
             {!! Form::close() !!}
+            
+            <div>
+                {!! link_to_route('tasks.show', 'タスク詳細へ戻る', ['id' => $task->id], ['class' => 'btn btn-light btn-block mb-3']) !!}
+            </div>
         </div>
     </div>
 
