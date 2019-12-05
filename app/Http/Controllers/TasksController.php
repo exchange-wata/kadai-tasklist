@@ -18,7 +18,8 @@ class TasksController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $tasks = Task::orderBy('created_at', 'desc')->paginate(9);
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(9);
+            // $tasks = Task::orderBy('created_at', 'desc')->paginate(9);
 
             $data = [
                 'user' => $user,

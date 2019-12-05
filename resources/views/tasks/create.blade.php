@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (Auth::check())
+
 
     <h1>タスクの新規作成ページ</h1>
     
@@ -29,4 +31,5 @@
         </div>
     </div>
 
+    @endif
 @endsection

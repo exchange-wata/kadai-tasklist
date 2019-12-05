@@ -16,11 +16,8 @@
                 <tbody>
                     @foreach ($tasks as $task)
                     <tr>
-                        @if (\Auth::id() == $task->user_id)
-                            <td>{!! link_to_route('tasks.show', $task->id, [$task -> id], ['class' => 'text-info']) !!}</td>
-                        @else
-                            <td>{{ $task -> id }}</td>
-                        @endif
+                        <td>{!! link_to_route('tasks.show', $task->id, [$task -> id], ['class' => 'text-info']) !!}</td>
+                        <!--<td>{{ $task -> user_id }}</td>-->
                         <td>{{ $task -> status }}</td>
                         <td>{{ $task -> content }}</td>
                     </tr>
@@ -28,18 +25,19 @@
                 </tbody>
             </table>
             {{ $tasks->links('pagination::bootstrap-4') }}
-
         @endif
         
         {!! link_to_route('tasks.create', '新規タスクの追加', [], ['class' => 'btn btn-info btn-block']) !!}
     
     @else
+    
         <div class="center jumbotron">
             <div class="text-center">
                 <h1>Welcome to the Tasks</h1>
                 {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
             </div>
         </div>
+        
     @endif
 
 

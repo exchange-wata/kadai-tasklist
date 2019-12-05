@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (Auth::check())
+
         <h1>タスクID : {{ $task->id }}の詳細ページ</h1>
         
         <table class="table table-hover">
@@ -29,4 +31,6 @@
         <div>
             {!! link_to_route('tasks.index', 'タスク一覧へ戻る', ['id' => $task->id], ['class' => 'btn btn-light btn-block mb-3']) !!}
         </div>
+        
+    @endif
 @endsection
