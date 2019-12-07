@@ -71,11 +71,17 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task = Task::find($id);
+        $user = \Auth::id();
+        $task = \App\Task::find($id);
+        if(!isset($task->user_id)){
+            return back();
+        }elseif ($user === $task->user_id) {
+            return view('tasks.show',[
+                'user' => $user,
+                'task' => $task,
+            ]);
+        }
         
-        return view('tasks.show',[
-            'task' => $task,
-        ]);
     }
 
     /**
@@ -86,11 +92,17 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
+        $user = \Auth::id();
         $task = Task::find($id);
         
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+        if(!isset($task->user_id)){
+            return back();
+        }elseif ($user === $task->user_id) {
+            return view('tasks.edit',[
+                'user' => $user,
+                'task' => $task,
+            ]);
+        }
     }
 
     /**
@@ -102,17 +114,22 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'content' => 'required|max:191',
-            'status' => 'required|max:10',
-        ]);
-        
+        $user = \Auth::id();
         $task = Task::find($id);
-        $task->content = $request->content;
-        $task->status = $request->status;
-        $task->save();
         
-        return redirect('/');
+        if(!isset($task->user_id)){
+            return back();
+        }elseif ($user === $task->user_id) {
+            $this->validate($request, [
+                'content' => 'required|max:191',
+                'status' => 'required|max:10',
+            ]);
+            $task->content = $request->content;
+            $task->status = $request->status;
+            $task->save();
+            
+            return redirect('/');
+        }
     }
 
     /**
